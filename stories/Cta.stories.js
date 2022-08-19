@@ -1,47 +1,86 @@
-import MyButton from './Cta.vue';
+import ctaButton from './Cta.vue';
+import { storiesOf } from '@storybook/vue';
+import { action } from '@storybook/addon-actions';
+import { userEvent, waitFor, within } from '@storybook/testing-library';
 
-// More on default export: https://storybook.js.org/docs/vue/writing-stories/introduction#default-export
 export default {
   title: 'Example/Cta',
-  component: MyButton,
-  // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
+  component: ctaButton,
   argTypes: {
     backgroundColor: { control: 'color' },
     ctaType: {
       control: { type: 'select' },
-      options: ['lineRed', 'navy', 'red'],
+      options: ['bgPurple', 'bgBlack'],
+    },
+  },
+  parameters: {
+    design: {
+      type: "figma",
+      url:
+        "https://www.figma.com/file/XZmQKqNVAqSXTJS1CAsXu1/Untitled?node-id=0%3A1",
     },
   },
 };
 
-// More on component templates: https://storybook.js.org/docs/vue/writing-stories/introduction#using-args
+
+storiesOf('Buttons', module)
+  .add('button', () => {
+    const label = text('Label', 'cta Button')
+    const backgroundColor = color('Color', '#409eff')
+    const height = number('height', 50)
+    const width = number('width', 150)
+    return {
+      components: { ctaButton },
+      template: `<Button
+        @click.native="action"
+        label="${label}"
+        backGroundColor="${backgroundColor}"
+        height="${height}px"
+        width="${width}px"
+      />`,
+      methods: { action: action('button-clicked') },
+    }
+  })
+
+
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
-  components: { MyButton },
-  template: '<my-button @onClick="onClick" v-bind="$props" />',
+  components: { ctaButton },
+  template: '<cta-button @onClick="onClick" v-bind="$props" />',
 });
 
 export const Primary = Template.bind({});
-// More on args: https://storybook.js.org/docs/vue/writing-stories/args
 Primary.args = {
   primary: true,
-  label: '버튼',
+  label: 'Button',
 };
 
-export const lineRed = Template.bind({});
-lineRed.args = {
-  ctaType: 'lineRed',
-  label: '버튼',
+
+export const bgPurple = Template.bind({});
+bgPurple.args = {
+  ctaType: 'bgPurple',
+  label: 'Button',
 };
 
-export const navy = Template.bind({});
-navy.args = {
-  ctaType: 'navy',
-  label: '버튼',
+export const bgBlack = Template.bind({});
+bgBlack.args = {
+  ctaType: 'bgBlack',
+  label: 'Button',
 };
 
-export const red = Template.bind({});
-red.args = {
-  ctaType: 'red',
-  label: '버튼',
+export const bgRed = Template.bind({});
+bgRed.args = {
+  ctaType: 'bgRed',
+  label: 'Button',
+};
+
+const Submitted = Template.bind({});
+Submitted.play = async ({ args, canvasElement }) => {
+  const canvas = within(canvasElement);
+
+  await userEvent.type(canvas.getByTestId('email'), 'hi@example.com');
+  await userEvent.type(canvas.getByTestId('password'), 'supersecret');
+  await userEvent.click(canvas.getByRole('button'));
+
+  await waitFor(() => expect(args.onSubmit).toHaveBeenCalled());
 };

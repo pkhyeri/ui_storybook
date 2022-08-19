@@ -6,7 +6,7 @@
 import './cta.css';
 
 export default {
-  name: 'my-button',
+  name: 'cta-button',
 
   props: {
     label: {
@@ -21,7 +21,7 @@ export default {
       type: String,
       default: 'primary',
       validator: function (value) {
-        return ['lineRed', 'navy', 'red'].indexOf(value) !== -1;
+        return ['bgPurple', 'bgBlack', 'bgRed'].indexOf(value) !== -1;
       },
     },
     backgroundColor: {
@@ -34,8 +34,7 @@ export default {
       return {
         'storybook-button': true,
         'storybook-button--primary': this.primary,
-        //'storybook-button--lineRed': !this.primary,
-        [`storybook-button--${this.argTypes}`]: true,
+        [`storybook-button--${this.ctaType}`]: true,
       };
     },
     style() {

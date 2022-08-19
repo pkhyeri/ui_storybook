@@ -1,34 +1,39 @@
 .storybook-button {
   font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-weight: 700;
-  border: 0;
-  border-radius: 4px;
+  width:200px;
+  height:60px;
+  border-radius: 60px;
   cursor: pointer;
   display: inline-block;
   line-height: 1;
-  padding: 15px 30px 15px 30px;
+  padding: 15px 0;
+  text-align: center;
   font-size: 14px;
-  color:#2A3044;
+  color:#874ECC;
 
 }
 .storybook-button--primary {
   background-color: #fff;
-  border:1px solid #DBDDE2;
+  border:1px solid #874ECC;
 }
 /* .storybook-button--secondary {
   color: #333;
   background-color: transparent;
   box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
 } */
-.storybook-button--lineRed {
-  background-color: transparent;
-  border:1px solid #E4464E;
+.storybook-button--bgPurple {
+  background-color: #874ECC;
+  border:1px solid #874ECC;
+  color: #fff;
 }
-.storybook-button--navy {
-  background-color: #39405A;
-  border:1px solid #39405A;
+.storybook-button--bgBlack {
+  background-color: #121212;
+  border:1px solid #121212;
+  color: #fff;
 }
-.storybook-button--red {
+.storybook-button--bgRed {
   background-color: #E4464E;
   border:1px solid #E4464E;
+  color: #fff;
 }

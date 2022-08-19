@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "chromatic": "npx chromatic --project-token=35e171d3ebe2 --exit-once-uploaded"
   },
   "repository": {
     "type": "git",
@@ -33,6 +34,10 @@
     "vue-loader": "^15.10.0"
   },
   "dependencies": {
+    "chromatic": "^6.7.4",
+    "storybook-addon-designs": "^6.3.1",
     "vue2": "^1.0.0"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "ui_storybook@1.0.0"
 }
