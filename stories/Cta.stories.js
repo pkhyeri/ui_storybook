@@ -1,16 +1,15 @@
 import ctaButton from './Cta.vue';
 import { storiesOf } from '@storybook/vue';
 import { action } from '@storybook/addon-actions';
-import { userEvent, waitFor, within } from '@storybook/testing-library';
 
 export default {
-  title: 'Example/Cta',
+  title: 'Design System/Atoms',
   component: ctaButton,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    //backgroundColor: { control: 'color' },
     ctaType: {
       control: { type: 'select' },
-      options: ['bgPurple', 'bgBlack'],
+      options: ['bgPurple', 'bgBlack', 'bgRed'],
     },
   },
   parameters: {
@@ -23,30 +22,10 @@ export default {
 };
 
 
-storiesOf('Buttons', module)
-  .add('button', () => {
-    const label = text('Label', 'cta Button')
-    const backgroundColor = color('Color', '#409eff')
-    const height = number('height', 50)
-    const width = number('width', 150)
-    return {
-      components: { ctaButton },
-      template: `<Button
-        @click.native="action"
-        label="${label}"
-        backGroundColor="${backgroundColor}"
-        height="${height}px"
-        width="${width}px"
-      />`,
-      methods: { action: action('button-clicked') },
-    }
-  })
-
-
 const Template = (args, { argTypes }) => ({
   props: Object.keys(argTypes),
   components: { ctaButton },
-  template: '<cta-button @onClick="onClick" v-bind="$props" />',
+  template: '<cta-button @onClick="onClick" @mouseover="onMouseover" v-bind="$props" />',
 });
 
 export const Primary = Template.bind({});
@@ -72,15 +51,4 @@ export const bgRed = Template.bind({});
 bgRed.args = {
   ctaType: 'bgRed',
   label: 'Button',
-};
-
-const Submitted = Template.bind({});
-Submitted.play = async ({ args, canvasElement }) => {
-  const canvas = within(canvasElement);
-
-  await userEvent.type(canvas.getByTestId('email'), 'hi@example.com');
-  await userEvent.type(canvas.getByTestId('password'), 'supersecret');
-  await userEvent.click(canvas.getByRole('button'));
-
-  await waitFor(() => expect(args.onSubmit).toHaveBeenCalled());
 };

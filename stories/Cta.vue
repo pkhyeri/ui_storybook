@@ -1,5 +1,5 @@
 <template>
-  <button type="button" :class="classes" @click="onClick" :style="style">{{ label }}</button>
+  <button type="button" :class="classes" @click="onClick" @mouseover="onMouseover" :style="style">{{ label }}</button>
 </template>
 
 <script>
@@ -24,9 +24,9 @@ export default {
         return ['bgPurple', 'bgBlack', 'bgRed'].indexOf(value) !== -1;
       },
     },
-    backgroundColor: {
-      type: String,
-    },
+    // backgroundColor: {
+    //   type: String,
+    // },
   },
 
   computed: {
@@ -48,6 +48,9 @@ export default {
     onClick() {
       this.$emit('onClick');
     },
+    onMouseover() {
+      this.$emit('onMouseover')
+    }
   },
 };
 </script>
